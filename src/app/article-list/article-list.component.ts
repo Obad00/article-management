@@ -69,19 +69,35 @@ export class ArticleComponent implements OnInit {
       const formValue = this.articleForm.value;
       if (this.isEditing && this.currentArticleId !== null) {
         // Update existing article
-        this.articleService.updateArticle(this.currentArticleId, formValue).subscribe(() => {
-          this.router.navigate(['/articles']);
-        });
+        this.articleService.updateArticle(this.currentArticleId, formValue).subscribe(
+          () => {
+            // Optionally update the local list if needed
+            const index = this.articles.findIndex(article => article.id === this.currentArticleId);
+            if (index > -1) {
+              this.articles[index] = { ...formValue, id: this.currentArticleId };  // Update locally
+            }
+            this.router.navigate(['/articles']); // Navigate after updating
+          },
+          error => {
+            console.error('Error updating article:', error); // Handle update errors
+          }
+        );
       } else {
-        // Add new article
-        this.articleService.createArticle(formValue).subscribe(() => {
-          // Optionally, you can update the local list of articles here
-          this.articles.unshift(formValue);  // Prepend locally, if needed
-          this.router.navigate(['/articles']);
-        });
+        // Create new article
+        this.articleService.createArticle(formValue).subscribe(
+          newArticle => {
+            // Optionally update the local list
+            this.articles.unshift(newArticle);  // Prepend locally
+            this.router.navigate(['/articles']); // Navigate after creating
+          },
+          error => {
+            console.error('Error creating article:', error); // Handle creation errors
+          }
+        );
       }
     }
   }
+  
   
 
   deleteArticle(id: number): void {
@@ -92,7 +108,7 @@ export class ArticleComponent implements OnInit {
   }
   
   editArticle(article: any): void {
-    console.log('Editing article with ID:', article.id); // Debugging line
+    console.log('Editing article with ID:', article.id); 
     this.isEditing = true;
     this.currentArticleId = article.id;
     this.articleForm.patchValue({
