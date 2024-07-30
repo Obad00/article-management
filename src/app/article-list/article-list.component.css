@@ -1,0 +1,68 @@
+/* src/app/article-list/article-list.component.css */
+
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .article-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .article-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .article-link {
+    font-size: 1.2rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .article-link:hover {
+    text-decoration: underline;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  .add-article-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .add-article-link:hover {
+    text-decoration: underline;
+  }
+  

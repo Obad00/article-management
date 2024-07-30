@@ -1,30 +1,105 @@
-// src/app/article-list/article-list.component.ts
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ArticleService } from '../article.service';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-article-list',
-  templateUrl: './article-list.component.html',
-  imports : [RouterLink, CommonModule],
-  standalone : true,
-  styleUrls: ['./article-list.component.css']
+  selector: 'app-article',
+  standalone: true,
+  templateUrl: './article-list.component.html', // Ensure this points to the correct file
+  styleUrls: ['./article-list.component.css'],       // This should be the correct path for styles
+  imports: [ReactiveFormsModule, RouterLink, CommonModule]
 })
-export class ArticleListComponent implements OnInit {
+export class ArticleComponent implements OnInit {
   articles: any[] = [];
+  articleForm: FormGroup;
+  isEditing = false;
+  currentArticleId: number | null = null;
+  userId = 1; // Hardcoded user ID for demonstration
 
-  constructor(private articleService: ArticleService) { }
-
-  ngOnInit(): void {
-    this.articleService.getArticles().subscribe(data => {
-      this.articles = data;
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private articleService: ArticleService
+  ) {
+    this.articleForm = this.fb.group({
+      title: [
+        '', 
+        [
+          Validators.required, 
+          Validators.minLength(5), 
+          Validators.maxLength(50)
+        ]
+      ],
+      body: [
+        '', 
+        [
+          Validators.required, 
+          Validators.minLength(20), 
+          Validators.maxLength(2000)
+        ]
+      ]
     });
   }
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditing = true;
+      this.currentArticleId = +id;
+      this.articleService.getArticle(this.currentArticleId).subscribe(article => {
+        this.articleForm.patchValue(article);
+      });
+    } else {
+      this.isEditing = false;
+      this.loadArticles();
+    }
+  }
+
+  loadArticles(): void {
+    this.articleService.getArticles().subscribe(data => {
+      this.articles = data.filter(article => article.userId === this.userId);
+    });
+  }
+
+  onSubmit(): void {
+    if (this.articleForm.valid) {
+      const formValue = this.articleForm.value;
+      if (this.isEditing && this.currentArticleId !== null) {
+        // Update existing article
+        this.articleService.updateArticle(this.currentArticleId, formValue).subscribe(() => {
+          this.router.navigate(['/articles']);
+        });
+      } else {
+        // Add new article
+        this.articleService.createArticle(formValue).subscribe(() => {
+          // Optionally, you can update the local list of articles here
+          this.articles.unshift(formValue);  // Prepend locally, if needed
+          this.router.navigate(['/articles']);
+        });
+      }
+    }
+  }
+  
 
   deleteArticle(id: number): void {
     this.articleService.deleteArticle(id).subscribe(() => {
+      // Remove the deleted article from the local list
       this.articles = this.articles.filter(article => article.id !== id);
     });
   }
+  
+  editArticle(article: any): void {
+    console.log('Editing article with ID:', article.id); // Debugging line
+    this.isEditing = true;
+    this.currentArticleId = article.id;
+    this.articleForm.patchValue({
+      title: article.title,
+      body: article.body
+    });
+  }
+  
+
 }

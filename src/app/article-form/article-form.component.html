@@ -1,10 +1,17 @@
+<!-- src/app/article-form/article-form.component.html
 <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="title">Title:</label>
     <input id="title" formControlName="title">
     <div *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.dirty || articleForm.get('title')?.touched)">
       <div *ngIf="articleForm.get('title')?.errors?.['required']">
-        Titre est requis.
+        Le titre est obligatoire.
+      </div>
+      <div *ngIf="articleForm.get('title')?.errors?.['minlength']">
+        Le titre doit comporter au moins 5 caractères.
+      </div>
+      <div *ngIf="articleForm.get('title')?.errors?.['maxlength']">
+        Le titre ne doit pas comporter plus de 50 caractères.
       </div>
     </div>
   </div>
@@ -13,9 +20,15 @@
     <textarea id="body" formControlName="body"></textarea>
     <div *ngIf="articleForm.get('body')?.invalid && (articleForm.get('body')?.dirty || articleForm.get('body')?.touched)">
       <div *ngIf="articleForm.get('body')?.errors?.['required']">
-        Description est requise.
+        Le corps est nécessaire.
+      </div>
+      <div *ngIf="articleForm.get('body')?.errors?.['minlength']">
+        Le corps doit comporter au moins 20 caractères.
+      </div>
+      <div *ngIf="articleForm.get('body')?.errors?.['maxlength']">
+        Le corps du texte ne doit pas dépasser 2000 caractères.
       </div>
     </div>
   </div>
   <button type="submit" [disabled]="articleForm.invalid">{{ isEditing ? 'Update' : 'Create' }}</button>
-</form>
+</form> -->
