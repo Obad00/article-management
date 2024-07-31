@@ -39,3 +39,54 @@
     color: #fff;
   }
   
+  /* Conteneur pour les commentaires */
+.comments-container {
+  margin-top: 20px;
+}
+
+/* Titre des commentaires */
+.comments-container h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+/* Liste des commentaires */
+.comments-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Élément de la liste des commentaires */
+.comments-container li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Nom et email du commentateur */
+.comments-container strong {
+  display: block;
+  font-size: 1rem;
+  color: #2980b9;
+  margin-bottom: 5px;
+}
+
+/* Contenu du commentaire */
+.comments-container p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Message lorsque aucun commentaire n'est disponible */
+.no-comments {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}

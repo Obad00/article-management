@@ -9,8 +9,8 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-article',
   standalone: true,
-  templateUrl: './article-list.component.html', // Ensure this points to the correct file
-  styleUrls: ['./article-list.component.css'],       // This should be the correct path for styles
+  templateUrl: './article-list.component.html', 
+  styleUrls: ['./article-list.component.css'],       
   imports: [ReactiveFormsModule, RouterLink, CommonModule]
 })
 export class ArticleComponent implements OnInit {
@@ -18,7 +18,7 @@ export class ArticleComponent implements OnInit {
   articleForm: FormGroup;
   isEditing = false;
   currentArticleId: number | null = null;
-  userId = 1; // Hardcoded user ID for demonstration
+  userId = 1; // ID d'utilisateur codé en dur pour la démonstration
 
   constructor(
     private fb: FormBuilder,
@@ -71,10 +71,10 @@ export class ArticleComponent implements OnInit {
       const formValue = this.articleForm.value;
   
       if (this.isEditing && this.currentArticleId !== null) {
-        // Update existing article
+        // Mise à jour de l'article existant
         this.articleService.updateArticle(this.currentArticleId, formValue).subscribe(
           () => {
-            // Optionally update the local list if needed
+            // Mise à jour facultative de la liste locale si nécessaire
             const index = this.articles.findIndex(article => article.id === this.currentArticleId);
             if (index > -1) {
               this.articles[index] = { ...formValue, id: this.currentArticleId };  // Update locally
@@ -96,15 +96,15 @@ export class ArticleComponent implements OnInit {
               text: "Une erreur s'est produite lors de la mise à jour de l'article. Veuillez réessayer.",
               confirmButtonText: 'OK'
             });
-            console.error('Error updating article:', error); // Handle update errors
+            console.error('Error updating article:', error); // Gérer les erreurs de mise à jour
           }
         );
       } else {
-        // Create new article
+        // Créer un nouvel article
         this.articleService.createArticle(formValue).subscribe(
           newArticle => {
-            // Optionally update the local list
-            this.articles.unshift(newArticle);  // Prepend locally
+            // Mise à jour facultative de la liste locale
+            this.articles.unshift(newArticle);  // Préparez localement
   
             Swal.fire({
               icon: 'success',
@@ -112,7 +112,7 @@ export class ArticleComponent implements OnInit {
               text: 'Votre nouvel article a été créé avec succès.',
               confirmButtonText: 'OK'
             }).then(() => {
-              this.router.navigate(['/articles']); // Navigate after creating
+              this.router.navigate(['/articles']); // Naviguer après la création
             });
           },
           error => {
@@ -122,7 +122,7 @@ export class ArticleComponent implements OnInit {
               text: "Une erreur s'est produite lors de la création de l'article. Veuillez réessayer.",
               confirmButtonText: 'OK'
             });
-            console.error('Error creating article:', error); // Handle creation errors
+            console.error('Error creating article:', error); // Gérer les erreurs de création
           }
         );
       }
@@ -145,7 +145,7 @@ export class ArticleComponent implements OnInit {
       if (result.isConfirmed) {
         this.articleService.deleteArticle(id).subscribe(
           () => {
-            // Remove the deleted article from the local list
+            // Supprimer l'article supprimé de la liste locale
             this.articles = this.articles.filter(article => article.id !== id);
             Swal.fire(
               'Supprimé!',
@@ -159,7 +159,7 @@ export class ArticleComponent implements OnInit {
               "Il y a eu un problème lors de la suppression de l'article. Veuillez réessayer.",
               'error'
             );
-            console.error('Error deleting article:', error); // Handle deletion errors
+            console.error('Error deleting article:', error); // Gérer les erreurs de suppression
           }
         );
       } else if (result.dismiss === Swal.DismissReason.cancel) {
