@@ -1,8 +1,8 @@
 <!-- src/app/article-detail/article-detail.component.html -->
 <div *ngIf="article" class="article-detail-container">
+  <a [routerLink]="['/articles']">Retour</a>
   <h2>{{ article.title }}</h2>
   <p>{{ article.body }}</p>
-  <a [routerLink]="['/articles']">Retour</a>
   <div *ngIf="comments.length > 0">
     <h2>Commentaires</h2>
     <ul>
