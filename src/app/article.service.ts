@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ArticleService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com'; // Base URL de votre API
+  private apiUrl = 'https://jsonplaceholder.typicode.com'; 
 
   constructor(private http: HttpClient) { }
 
