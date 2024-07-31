@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ArticleDetailComponent implements OnInit {
   article: any;
-  comments: any[] = []; // Array to hold comments
+  comments: any[] = []; 
 
   constructor(
     private route: ActivatedRoute,
