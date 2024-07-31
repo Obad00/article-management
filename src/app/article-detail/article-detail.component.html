@@ -1,7 +1,6 @@
 <!-- src/app/article-detail/article-detail.component.html -->
-<div *ngIf="article">
-    <h2>{{ article.title }}</h2>
-    <p>{{ article.body }}</p>
-    <a [routerLink]="['/edit-article', article.id]">Edit</a>
-  </div>
-  
+<div *ngIf="article" class="article-detail-container">
+  <h2>{{ article.title }}</h2>
+  <p>{{ article.body }}</p>
+  <a [routerLink]="['/articles']">Retour</a>
+</div>
