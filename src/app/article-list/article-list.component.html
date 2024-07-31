@@ -1,13 +1,14 @@
 <div class="accueil">
 
-    <!-- src/app/article/article.component.html -->
-<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+  <!-- src/app/article/article.component.html -->
+  <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <div>
-        <h1 class="title">Ajouter un article</h1>
+      <h1 class="title">Ajouter un article</h1>
 
       <label for="title">Titre:</label>
       <input id="title" formControlName="title">
-      <div *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.dirty || articleForm.get('title')?.touched)">
+      <div
+        *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.dirty || articleForm.get('title')?.touched)">
         <div *ngIf="articleForm.get('title')?.errors?.['required']">
           Le titre est obligatoire.
         </div>
@@ -22,7 +23,8 @@
     <div>
       <label for="body">Description:</label>
       <textarea id="body" formControlName="body"></textarea>
-      <div *ngIf="articleForm.get('body')?.invalid && (articleForm.get('body')?.dirty || articleForm.get('body')?.touched)">
+      <div
+        *ngIf="articleForm.get('body')?.invalid && (articleForm.get('body')?.dirty || articleForm.get('body')?.touched)">
         <div *ngIf="articleForm.get('body')?.errors?.['required']">
           La description est nécessaire.
         </div>
@@ -36,7 +38,8 @@
     </div>
     <button type="submit" [disabled]="articleForm.invalid">{{ isEditing ? 'Update' : 'Create' }}</button>
   </form>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
   <div class="article-container">
     <h2 class="title">Liste des articles</h2>
@@ -54,7 +57,7 @@
       </li>
     </ul>
   </div>
-  
-  
+
+
 
 </div>
