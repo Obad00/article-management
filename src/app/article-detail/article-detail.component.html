@@ -3,18 +3,4 @@
   <h2>{{ article.title }}</h2>
   <p>{{ article.body }}</p>
   <a [routerLink]="['/articles']">Retour</a>
-  <div *ngIf="comments.length > 0">
-    <h2>Commentaires</h2>
-    <ul>
-      <li *ngFor="let comment of comments">
-        <strong>{{ comment.name }} ({{ comment.email }}):</strong>
-        <p>{{ comment.body }}</p>
-      </li>
-    </ul>
-  </div>
-
-  <div *ngIf="comments.length === 0">
-    <p>Aucun commentaire pour cet article.</p>
-  </div>
 </div>
-
