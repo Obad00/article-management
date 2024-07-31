@@ -169,22 +169,54 @@ h2 {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Boutons avec fond transparent */
+.btn {
+  background-color: transparent; /* Fond transparent */
+  border: 2px solid transparent; /* Bordure transparente pour le bouton */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Style pour les boutons avec icônes */
 .btn-primary {
-  background-color: #2980b9;
+  border-color: #2980b9; /* Bordure de couleur */
 }
 
 .btn-danger {
-  background-color: #dc3545;
+  border-color: #dc3545; /* Bordure de couleur */
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
-  transform: scale(1.05);
+  border-color: #0056b3; /* Changer la couleur de la bordure au survol */
+  transform: scale(1.05); /* Effet de mise à l'échelle */
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
-  transform: scale(1.05);
+  border-color: #c82333; /* Changer la couleur de la bordure au survol */
+  transform: scale(1.05); /* Effet de mise à l'échelle */
+}
+
+/* Style pour les icônes */
+.btn .bi {
+  font-size: 1.25rem; /* Taille des icônes */
+  transition: color 0.3s ease;
+}
+
+/* Couleur des icônes par défaut */
+.btn-primary .bi {
+  color: #2980b9; /* Couleur des icônes pour le bouton primaire */
+}
+
+.btn-danger .bi {
+  color: #dc3545; /* Couleur des icônes pour le bouton danger */
+}
+
+/* Couleur des icônes au survol */
+.btn-primary:hover .bi {
+  color: #0056b3; /* Couleur des icônes au survol pour le bouton primaire */
+}
+
+.btn-danger:hover .bi {
+  color: #c82333; /* Couleur des icônes au survol pour le bouton danger */
 }
 
 /* Keyframes for animations */
