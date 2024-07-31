@@ -1,7 +1,11 @@
-<!-- src/app/article/article.component.html -->
+<div class="accueil">
+
+    <!-- src/app/article/article.component.html -->
 <form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
     <div>
-      <label for="title">Title:</label>
+        <h1 class="title">Ajouter un article</h1>
+
+      <label for="title">Titre:</label>
       <input id="title" formControlName="title">
       <div *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.dirty || articleForm.get('title')?.touched)">
         <div *ngIf="articleForm.get('title')?.errors?.['required']">
@@ -16,31 +20,41 @@
       </div>
     </div>
     <div>
-      <label for="body">Body:</label>
+      <label for="body">Description:</label>
       <textarea id="body" formControlName="body"></textarea>
       <div *ngIf="articleForm.get('body')?.invalid && (articleForm.get('body')?.dirty || articleForm.get('body')?.touched)">
         <div *ngIf="articleForm.get('body')?.errors?.['required']">
-          Le corps est nécessaire.
+          La description est nécessaire.
         </div>
         <div *ngIf="articleForm.get('body')?.errors?.['minlength']">
-          Le corps doit comporter au moins 20 caractères.
+          La description doit comporter au moins 20 caractères.
         </div>
         <div *ngIf="articleForm.get('body')?.errors?.['maxlength']">
-          Le corps du texte ne doit pas dépasser 2000 caractères.
+          Le description du texte ne doit pas dépasser 2000 caractères.
         </div>
       </div>
     </div>
     <button type="submit" [disabled]="articleForm.invalid">{{ isEditing ? 'Update' : 'Create' }}</button>
   </form>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+
   <div class="article-container">
     <h2 class="title">Liste des articles</h2>
     <ul class="article-list">
       <li *ngFor="let article of articles" class="article-item">
         <a [routerLink]="['/article', article.id]" class="article-link">{{ article.title }}</a>
-        <button (click)="editArticle(article)" class="edit-button">Edit</button>
-        <button (click)="deleteArticle(article.id)" class="delete-button">Delete</button>
+        <div class="btn-group">
+          <button (click)="editArticle(article)" class="btn btn-primary">
+            <i class="bi bi-pencil"></i> <!-- Bootstrap edit icon -->
+          </button>
+          <button (click)="deleteArticle(article.id)" class="btn btn-danger">
+            <i class="bi bi-trash"></i> <!-- Bootstrap delete icon -->
+          </button>
+        </div>
       </li>
     </ul>
   </div>
   
+  
+
+</div>
