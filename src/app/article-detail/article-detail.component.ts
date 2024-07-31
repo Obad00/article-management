@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ArticleDetailComponent implements OnInit {
   article: any;
+  comments: any[] = []; // Array to hold comments
 
   constructor(
     private route: ActivatedRoute,
@@ -21,8 +22,19 @@ export class ArticleDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
+    
+    // Récupérer les détails de l'article
     this.articleService.getArticle(id).subscribe(data => {
       this.article = data;
+    }, error => {
+      console.error('Erreur lors de la récupération de l\'article', error);
+    });
+
+    // Récupérer les commentaires de l'article
+    this.articleService.getCommentsForArticle(id).subscribe(data => {
+      this.comments = data;
+    }, error => {
+      console.error('Erreur lors de la récupération des commentaires', error);
     });
   }
 }
